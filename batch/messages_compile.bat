@@ -1,8 +1,10 @@
 echo off
+setlocal EnableExtensions enabledelayedexpansion 
 
-pushd %~dp0
-call messages_common.bat
+call "%~dp0messages_common.bat" %1 %2
+if errorlevel 1 goto :eof
 
-cd ..
+echo msgfmt -o %mo_file% %po_file%
 msgfmt -o %mo_file% %po_file%
-popd
+
+endlocal

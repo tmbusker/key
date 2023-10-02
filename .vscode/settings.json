@@ -5,30 +5,23 @@
 
     // python
     "python.defaultInterpreterPath": "${workspaceFolder}\\..\\venv\\Scripts\\python.exe",
-    // "python.linting.flake8Enabled": true,
-    "flake8.args": [
-        "--config=${workspaceFolder}\\.flake8",
+    // "flake8.args": [
+    //     "--config=${workspaceFolder}\\.flake8",
+    // ],
+    "python.testing.pytestArgs": [
+        "busker"
     ],
-    // "python.linting.mypyEnabled": true,
-    "mypy.configFile": ".mypy.ini",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // "mypy.configFile": ".mypy.ini",
 
     // spell
     "cSpell.enabled": true,
-    // "cSpell.diagnosticLevel": "Hint",
-    "cSpell.diagnosticLevel": "Warning",
+    "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
-    "cSpell.customDictionaries": {
-        "project-words": {
-            "name": "project-words",
-            "path": "${workspaceFolder}\\photo_collector-words.txt",
-            "description": "Words used in this project",
-            "addWords": true
-        },
-        "custom": true, // Enable the `custom` dictionary
-        "internal-terms": false // Disable the `internal-terms` dictionary
-    },
-    "cSpell.ignorePaths": [
-        "./photo_collector-words.txt",
-    ],
+
     "terminal.integrated.tabs.defaultColor": "terminal.ansiBlue",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUndefinedVariable": "none"
+    },
 }

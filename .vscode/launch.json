@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Run Photo Organizer",
+            "type": "python",
+            "request": "launch",
+            // "program": "${workspaceFolder}/busker/file/photo/organizer.py",
+            "module": "busker.file.photo.organizer",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Run Backup Files",
+            "type": "python",
+            "request": "launch",
+            // "program": "${workspaceFolder}/busker/file/backup/backupper.py",
+            "module": "busker.file.backup.backupper",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "pytest busker", 
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "--cov-report", "html",
+                "--cov=busker",
+                "--cov-config=.coveragerc",
+                "-s"
+            ],
+            "env": {},
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+        }
+    ]
+}

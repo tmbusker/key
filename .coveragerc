@@ -1,0 +1,2 @@
+[run]
+omit=busker/file/sql.py, busker/file/photo/organizer.py

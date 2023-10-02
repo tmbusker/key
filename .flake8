@@ -1,7 +1,9 @@
 [flake8]
 max-line-length = 120
-; F401: imported but not used
-; F403: unable to detect undefined names
-; F405: undefined or defined from start imports
-ignore=F401, F403, F405 __init__.py
-; E225: missing whitespace around operator
+
+; blank line contains whitespace
+extend-ignore = W293
+
+; undefined name '_'
+; per-file-ignores = 
+;     busker\file\photo\collector.py: F821

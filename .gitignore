@@ -1,3 +1,11 @@
 __pycache__/
+htmlcov/
+venv/
 
-*.mo
+*.db
+*.db-journal
+*.log
+.coverage
+*.po~
+*.pot
+
