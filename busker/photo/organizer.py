@@ -4,6 +4,7 @@ import os
 import shutil
 import logging
 import traceback
+from gettext import gettext as _
 from tkinter import filedialog, messagebox
 from busker.tkinter import center_window, MessagePanel
 from busker.utils import init_i18n, init_logging
@@ -17,7 +18,9 @@ logger.setLevel(logging.INFO)
 
 
 class PhotoOrganizer:
-    batch_size = 100
+    """写真整理プログラム"""
+
+    batch_size = 100        # 一回にて処理できるファイルの数
 
     def __init__(self, conn):
         self.conn = conn
@@ -76,6 +79,8 @@ class PhotoOrganizer:
                 self.window.destroy()
 
     def select_source_directory(self):
+        """整理元となるフォルダーを指定する"""
+
         folder_selected = filedialog.askdirectory()
         self.src_entry.config(state=tk.NORMAL)
         self.src_entry.delete(0, tk.END)
@@ -83,6 +88,8 @@ class PhotoOrganizer:
         self.src_entry.config(state=tk.DISABLED)
 
     def select_target_directory(self):
+        """バックアップ先フォルダーを指定する"""
+
         folder_selected = filedialog.askdirectory()
         self.tgt_entry.config(state=tk.NORMAL)
         self.tgt_entry.delete(0, tk.END)
@@ -91,6 +98,7 @@ class PhotoOrganizer:
 
     def collect_photos(self):
         """写真を元の場所から保存先へコピーする、コピーした写真情報はDBに収集保存する"""
+
         if not self.src_entry.get():
             messagebox.showerror(_("Input Error"), _("Input Required"), _("{} must be entered.").format(self.src_label.cget("text")))     # noqa F821
             return
@@ -117,12 +125,7 @@ class PhotoOrganizer:
             self.message_panel.text_widget.update()
 
             # 保存先フォルダーにあるファイルの情報がDBに未登録の場合は追加登録する
-            if sql.get_count(self.conn):
-                self.message_panel.add_message(_('Collecting photo information...'))        # noqa F821
-                logger.info('Collecting photo information...')
-                self.inspect_collected_files(self.tgt_entry.get())
-                self.message_panel.add_message(_('Collecting photo information has finished.'))        # noqa F821
-                logger.info('Collecting photo information has finished.')
+            self.inspect_collected_files(self.tgt_entry.get())
 
             self.message_panel.add_message(_('Copying and collecting photos...'))        # noqa F821
             logger.info('Copying and collecting photos...')
@@ -142,6 +145,10 @@ class PhotoOrganizer:
 
     def inspect_collected_files(self, target_path: str) -> None:
         """保存先フォルダーにあるファイル情報が未収集の場合、DBに追加収集する"""
+
+        self.message_panel.add_message(_('Collecting photo information...'))        # noqa F821
+        logger.info('Collecting photo information...')
+
         for file_infos in read_all_files(target_path, 1000):
             for file_info in file_infos:
                 save_to = file_info.get_relative_path(target_path)
@@ -156,6 +163,9 @@ class PhotoOrganizer:
                         file_info.save_to = save_to
                         sql.register_file_info(self.conn, file_info)
                         logger.debug(f'File {file_info.full_name} has been added to the database.')     # noqa
+
+        self.message_panel.add_message(_('Collecting photo information has finished.'))        # noqa F821
+        logger.info('Collecting photo information has finished.')
 
     def copy_photos(self, source_path: str, target_path: str) -> None:
         """指定フォルダー下にある写真ファイルを保存先にコピーし、ファイル情報をDBに収集する"""

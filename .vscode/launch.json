@@ -6,10 +6,11 @@
             "type": "python",
             "request": "launch",
             // "program": "${workspaceFolder}/busker/file/photo/organizer.py",
-            "module": "busker.file.photo.organizer",
+            "module": "busker.photo.organizer",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/Scripts/python.exe",
             "justMyCode": true
         },
         {

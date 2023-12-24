@@ -41,6 +41,7 @@ class FileInfo:
                  file_type: str,
                  captured_at: Optional[datetime],
                  save_to: str) -> None:
+        
         if name is None or path is None:
             raise TypeError("Both 'name' and 'path' parameters are required.")
         self.id = id
@@ -64,9 +65,10 @@ class FileInfo:
         return self.path.replace(relative_root, '')
 
     @classmethod
-    def create(cls, name: str, path: str) -> 'FileInfo':
+    def create(cls, file_name: str, file_path: str) -> 'FileInfo':
         """ファイルからFileInfoを生成する"""
-        full_name = os.path.join(path, name)
+
+        full_name = os.path.join(file_path, file_name)
         size = os.path.getsize(full_name)
 
         hash = None
@@ -78,7 +80,7 @@ class FileInfo:
 
         created_at = datetime.fromtimestamp(os.path.getctime(full_name))
         modified_at = datetime.fromtimestamp(os.path.getmtime(full_name))
-        file_type = FileType.create(name)
+        file_type = FileType.create(file_name)
 
         captured_at = modified_at
         if file_type == FileType.IMAGE:
@@ -93,8 +95,8 @@ class FileInfo:
         
         save_to = datetime.strftime(captured_at, "%Y" + os.path.sep + "%m")
         return FileInfo(None,
-                        name,
-                        path,
+                        file_name,
+                        file_path,
                         size,
                         hash,
                         created_at,
@@ -105,6 +107,7 @@ class FileInfo:
 
 
 def read_all_files(directory: str, batch_size: int) -> List[List[FileInfo]]:
+    """指定したフォルダーからすべてのファイルのファイル情報を読み取る、一回読込の最大ファイル数を指定できる"""
     file_infos: List[FileInfo] = []
     for root, dirs, files in os.walk(directory):
         for file in files:

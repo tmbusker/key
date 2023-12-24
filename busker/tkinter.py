@@ -20,13 +20,13 @@ def center_window(window, offsetx: int = 0, offsety: int = 0):
 
 
 class MessagePanel(tk.Frame):
+    """メッセージ表示領域"""
+
     def __init__(self, width, height, master=None, max_lines=10):
         super().__init__(master)
-        self.create_widgets(width, height)
         self.messages = []
         self.max_lines = max_lines
 
-    def create_widgets(self, width, height):
         # Create a Text widget to display messages
         self.text_widget = tk.Text(self, width=width, height=height, wrap=tk.WORD)
         self.text_widget.pack(side=tk.LEFT, fill=tk.Y)
@@ -39,6 +39,8 @@ class MessagePanel(tk.Frame):
         self.text_widget.config(yscrollcommand=self.scrollbar.set)
 
     def add_message(self, message):
+        """メッセージ表示領域にメッセージを追加表示する"""
+        
         self.messages.append(message)
         if len(self.messages) > self.max_lines:
             self.messages.pop(0)

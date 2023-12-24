@@ -2,7 +2,7 @@ import logging
 from datetime import datetime, date
 from numbers import Number
 from typing import Any, Iterable, List, Optional
-from busker.file.file_info import FileInfo
+from busker.photo.file_info import FileInfo
 
 
 logger = logging.getLogger("busker.file.sql")
@@ -11,6 +11,8 @@ logger.setLevel(logging.INFO)
 
 
 def parameterize_query(query: str, parameters: Optional[Iterable[Any]] = None) -> str:
+    """パラメータを代入したSQL文を返す"""
+
     if parameters is None:
         return query
 
@@ -35,6 +37,8 @@ def parameterize_query(query: str, parameters: Optional[Iterable[Any]] = None) -
 
 
 def exec_query(conn, query: str, parameters: Optional[Iterable[Any]] = None):
+    """Execute the SQL"""
+
     logger.debug(parameterize_query(query, parameters))
     cursor = conn.cursor()
     if parameters:
@@ -45,7 +49,8 @@ def exec_query(conn, query: str, parameters: Optional[Iterable[Any]] = None):
 
 
 def create_table_file_info(conn) -> None:
-    """create clause for sqlite3"""
+    """Create tables(sqlite3)"""
+
     query = '''
             CREATE TABLE IF NOT EXISTS file_info (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,16 +71,17 @@ def create_table_file_info(conn) -> None:
 
 
 def get_count(conn):
-    query = 'SELECT count(1) FROM file_info'
+    """file_infoテーブルの件数を取得する"""
 
+    query = 'SELECT count(1) FROM file_info'
     cursor = exec_query(conn, query)
     return cursor.fetchone()[0]
 
 
 def get_file_by_save_to__name(conn, save_to: str, name: str) -> List['FileInfo']:
     """相対パスと名称を条件に、登録済みファイル情報を検索する"""
-    query = 'SELECT * FROM file_info WHERE save_to = ? AND name = ?'
 
+    query = 'SELECT * FROM file_info WHERE save_to = ? AND name = ?'
     parameters = (save_to, name)
     cursor = exec_query(conn, query, parameters)
     results = cursor.fetchall()
@@ -89,8 +95,8 @@ def get_file_by_save_to__name(conn, save_to: str, name: str) -> List['FileInfo']
 
 def get_same_file(conn, file_info: FileInfo) -> Optional[FileInfo]:
     """ファイル情報（サイズ、hash、撮影日時）を条件に、登録済みファイル情報を検索する"""
-    query = 'SELECT * FROM file_info WHERE size = ? AND hash = ? AND captured_at = ?'
 
+    query = 'SELECT * FROM file_info WHERE size = ? AND hash = ? AND captured_at = ?'
     parameters = (file_info.size, file_info.hash, file_info.captured_at)
     cursor = exec_query(conn, query, parameters)
     result = cursor.fetchone()
@@ -102,6 +108,8 @@ def get_same_file(conn, file_info: FileInfo) -> Optional[FileInfo]:
 
 
 def register_file_info(conn, file_info: FileInfo) -> None:
+    """Insert a new record to the table file_info"""
+    
     query = 'insert into file_info (name, path, size, hash, created_at, modified_at, file_type, captured_at, \
              save_to) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 
