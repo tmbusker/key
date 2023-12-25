@@ -13,7 +13,7 @@ from busker.photo import sql
 
 
 # init_logging('photo_organizer.log', logging.INFO, 'utf-8')
-logger = logging.getLogger("busker.file.photo.organizer")
+logger = logging.getLogger("busker.photo.organizer")
 logger.setLevel(logging.INFO)
 
 

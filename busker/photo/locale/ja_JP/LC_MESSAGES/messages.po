@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-13 20:00+0900\n"
+"POT-Creation-Date: 2023-12-25 05:32+0900\n"
 "PO-Revision-Date: 2023-10-21 06:35+0900\n"
 "Last-Translator: <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
@@ -18,83 +18,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:28
+#: D:\silos\kee\busker\photo\organizer.py:31
 msgid "Collect Photos Automatically"
 msgstr "写真収集"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:35
+#: D:\silos\kee\busker\photo\organizer.py:38
 msgid "Source Directory"
 msgstr "元の場所"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:41
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:52
+#: D:\silos\kee\busker\photo\organizer.py:44
+#: D:\silos\kee\busker\photo\organizer.py:55
 msgid "Select"
 msgstr "選択"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:46
+#: D:\silos\kee\busker\photo\organizer.py:49
 msgid "Target Directory"
 msgstr "保存先"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:62
+#: D:\silos\kee\busker\photo\organizer.py:65
 msgid "Collect photos"
 msgstr "写真収集"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:66
+#: D:\silos\kee\busker\photo\organizer.py:69
 msgid "Close"
 msgstr "閉じる"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:74
+#: D:\silos\kee\busker\photo\organizer.py:77
 msgid "Quit"
 msgstr "終了"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:74
+#: D:\silos\kee\busker\photo\organizer.py:77
 msgid "Do you really want to quit?"
 msgstr "終了してもよろしいでしょうか？"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:95
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:100
+#: D:\silos\kee\busker\photo\organizer.py:103
+#: D:\silos\kee\busker\photo\organizer.py:108
 msgid "Input Error"
 msgstr "入力エラー"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:95
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:100
+#: D:\silos\kee\busker\photo\organizer.py:103
+#: D:\silos\kee\busker\photo\organizer.py:108
 msgid "Input Required"
 msgstr "必須項目"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:95
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:100
+#: D:\silos\kee\busker\photo\organizer.py:103
+#: D:\silos\kee\busker\photo\organizer.py:108
 msgid "{} must be entered."
 msgstr "{}を入力してください。"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:105
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:109
+#: D:\silos\kee\busker\photo\organizer.py:113
+#: D:\silos\kee\busker\photo\organizer.py:117
 msgid "Confirmation"
 msgstr "確認"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:105
+#: D:\silos\kee\busker\photo\organizer.py:113
 msgid "The destination folder is not empty. Do you want to proceed?"
 msgstr "指定された保存先が空ではないです。処理を継続しますか？"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:109
+#: D:\silos\kee\busker\photo\organizer.py:117
 msgid "The destination folder is not exist. Do you want to create it?"
 msgstr "指定された保存先が存在しません。指定フォルダーを作成しますか？"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:121
-msgid "Collecting photo information..."
-msgstr "写真情報を収集しています。"
-
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:124
-msgid "Collecting photo information has finished."
-msgstr "写真情報の収集が完了しました。"
-
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:127
+#: D:\silos\kee\busker\photo\organizer.py:130
 msgid "Copying and collecting photos..."
 msgstr "写真ファイルをコピーしています。"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:133
+#: D:\silos\kee\busker\photo\organizer.py:136
 msgid "Coping and collecting photos has finished."
 msgstr "写真ファイルのコピーが完了しました。"
 
-#: C:\Users\tamam\.git\silos\busking-desktop\busker\file\photo\organizer.py:140
+#: D:\silos\kee\busker\photo\organizer.py:143
 msgid "Unknown Error"
 msgstr "不明のエラー"
+
+#: D:\silos\kee\busker\photo\organizer.py:149
+msgid "Collecting photo information..."
+msgstr "写真情報を収集しています。"
+
+#: D:\silos\kee\busker\photo\organizer.py:167
+msgid "Collecting photo information has finished."
+msgstr "写真情報の収集が完了しました。"

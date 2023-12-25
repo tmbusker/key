@@ -5,12 +5,11 @@
             "name": "Python: Run Photo Organizer",
             "type": "python",
             "request": "launch",
-            // "program": "${workspaceFolder}/busker/file/photo/organizer.py",
             "module": "busker.photo.organizer",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
-            "python": "${workspaceFolder}/venv/Scripts/python.exe",
+            // "python": "${workspaceFolder}\\venv_kee\\Scripts\\python.exe",
             "justMyCode": true
         },
         {
