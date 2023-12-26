@@ -1,6 +1,6 @@
 __pycache__/
 htmlcov/
-venv_kee/
+venv/
 
 *.db
 *.db-journal

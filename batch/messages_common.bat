@@ -4,8 +4,8 @@ REM Check for command-line arguments
 if "%1"=="" (
     echo Usage : %~0 app_path [locale]
     echo         app_path relative to project base directory
-    echo Usage Sample1 : %~0 busker\file\photo ja_JP
-    echo Usage Sample2 : %~0 busker\file\photo
+    echo Usage Sample1 : %~0 busker\photo ja_JP
+    echo Usage Sample2 : %~0 busker\photo
     exit /b 1
 )
 
@@ -20,7 +20,7 @@ cd ..
 set "app_path=!cd!\%1"
 popd
 
-set "locale_base=%app_path%\locale"
+set "locale_base=%app_path%\locales"
 set "locale_path=%locale_base%\%locale%\LC_MESSAGES"
 
 set "pot_file=%locale_base%\messages.pot"
