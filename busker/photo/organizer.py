@@ -213,6 +213,6 @@ class PhotoOrganizer:
 with sqlite3.connect('photo_organizer.db') as connection:
     init_logging('photo_organizer.log', logging.INFO, 'utf-8')
     localedir = os.path.join(os.path.dirname(__file__), 'locales')
-    init_i18n('busker', localedir)
+    init_i18n('messages', localedir)
     app = PhotoOrganizer(connection)
     app.run()

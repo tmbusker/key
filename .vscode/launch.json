@@ -10,7 +10,7 @@
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "python": "${workspaceFolder}/venv/Scripts/python.exe",
-            "justMyCode": true
+            "justMyCode": false
         },
         {
             "name": "Python: Run Backup Files",
@@ -21,7 +21,7 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": false
         },
         {
             "name": "pytest busker", 

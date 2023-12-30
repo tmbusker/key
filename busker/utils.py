@@ -3,16 +3,25 @@ import logging
 import locale
 
 
-def init_i18n(app: str, localedir: str) -> None:     # pragma: no cover
+def init_i18n(domain: str, localedir: str) -> None:     # pragma: no cover
     """多言語対応の初期化、localedirはlocaleフォルダーの絶対パス"""
     lang, _ = locale.getdefaultlocale()
     print(locale.getdefaultlocale())
 
-    _translation = gettext.translation('messages', localedir=localedir, languages=[lang])       # type: ignore
+    # Bind the text domain to the specified directory
+    gettext.bindtextdomain(domain, localedir)
+
+    # Set the text domain
+    gettext.textdomain(domain)
+    
+    # Create and install the translation
+    _translation = gettext.translation(domain, localedir=localedir, languages=[lang], fallback=True)  # type: ignore
     _translation.install()
-    print("Installed domain:", gettext._current_domain)     # type: ignore
-    print("Installed languages:", gettext.find('messages', localedir=localedir))
-    print("Installed languages:", gettext.find('messages', localedir=localedir, languages=[lang]))      # type: ignore
+    
+    print('Installed domain:', gettext._current_domain)     # type: ignore
+    print('Installed languages:', gettext.find(domain, localedir=localedir))
+    print('Installed languages:', gettext.find(domain, localedir=localedir, languages=[lang]))      # type: ignore
+    print('close', gettext.gettext('Close'))
 
 
 def init_logging(file_name: str, level, encoding: str) -> None:        # pragma: no cover
