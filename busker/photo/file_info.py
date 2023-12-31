@@ -18,6 +18,8 @@ class FileType:
 
     @classmethod
     def create(cls, file_name) -> str:
+        """Crate a FileType object based on file extension"""
+        
         file_extension = os.path.splitext(file_name)[1]
         if file_extension.lower() in ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff'):
             return cls.IMAGE
@@ -42,7 +44,7 @@ class FileInfo:
                  captured_at: Optional[datetime],
                  save_to: str) -> None:
         
-        if name is None or path is None:
+        if not name or not path:
             raise TypeError("Both 'name' and 'path' parameters are required.")
         self.id = id
         self.name = name
