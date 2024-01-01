@@ -52,18 +52,42 @@ class TestFileInfo:
         with pytest.raises(TypeError, match="Both 'name' and 'path' parameters are required."):
             FileInfo(0, 'name', '', 100, '3324a', now, now, 'image', None, 'c:\\temp')
 
-    def test_create_except(self):
-        name = 'screenshot20231009.png'
+    def test_create_captured_at(self):
+        name = 'IMG_20190417_114435.jpg'
         path = os.path.dirname(os.path.abspath(__file__))
-        timestamp = datetime.datetime(2023, 12, 25, 9, 20, 30, 825352)
 
         file_info = FileInfo.create(name, path)
+        assert file_info.id is None
+        assert file_info.name == name
+        assert file_info.path == path
+        assert file_info.hash == '1578d32ce770118aa4193374c4837eff'
+        assert file_info.created_at == datetime(2023, 12, 25, 9, 20, 30, 823322)
+        assert file_info.modified_at == datetime(2023, 12, 25, 9, 20, 30, 824315)
+        assert file_info.file_type == FileType.IMAGE
+        assert file_info.captured_at == datetime(2019, 4, 17, 11, 44, 37)
+        assert file_info.save_to == '2019\\04'
+
+    def test_create_without_captured_at(self):
+        name = 'screenshot20231009.png'
+        path = os.path.dirname(os.path.abspath(__file__))
+
+        file_info = FileInfo.create(name, path)
+        assert file_info.id is None
         assert file_info.name == name
         assert file_info.path == path
         assert file_info.hash == '5952a66a8be9d8f8a2b991f01c2349fd'
-        assert file_info.created_at == timestamp
-        assert file_info.modified_at == timestamp
+        assert file_info.created_at == datetime(2023, 12, 25, 9, 20, 30, 825352)
+        assert file_info.modified_at == datetime(2023, 12, 25, 9, 20, 30, 825352)
         assert file_info.file_type == FileType.IMAGE
-        assert file_info.captured_at == timestamp
+        assert file_info.captured_at is None
         assert file_info.save_to == '2023\\12'
 
+    def test_create_except(self):
+        with pytest.raises(TypeError):
+            FileInfo.create('screenshot20231009.png', None)
+
+        with pytest.raises(TypeError):
+            FileInfo.create(None, os.path.dirname(os.path.abspath(__file__)))
+
+        with pytest.raises(FileNotFoundError):
+            FileInfo.create('screenshot20231009.png', '.')

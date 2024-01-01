@@ -84,18 +84,18 @@ class FileInfo:
         modified_at = datetime.fromtimestamp(os.path.getmtime(full_name))
         file_type = FileType.create(file_name)
 
-        captured_at = modified_at
-        if file_type == FileType.IMAGE:
+        captured_at = None
+        if file_type in (FileType.IMAGE, FileType.VIDEO):
             try:
                 with Image.open(full_name) as img:
-                    exif = img.getexif()
+                    exif = img._getexif()               # type: ignore
                     if exif:
                         datetime_str = exif.get(0x9003)
                         captured_at = datetime.strptime(datetime_str, "%Y:%m:%d %H:%M:%S")    # type: ignore
             except Exception:
                 pass
         
-        save_to = datetime.strftime(captured_at, "%Y" + os.path.sep + "%m")
+        save_to = datetime.strftime(captured_at if captured_at is not None else modified_at, "%Y" + os.path.sep + "%m")
         return FileInfo(None,
                         file_name,
                         file_path,
