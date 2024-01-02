@@ -29,8 +29,8 @@ class PhotoOrganizer:
 
         self.window = tk.Tk()
         self.window.title(_("Collect Photos Automatically"))        # noqa F821
-        self.window_width = 400
-        self.window_height = 600
+        # self.window_width = 400
+        # self.window_height = 600
         center_window(self.window, offsetx=100, offsety=200)
 
         # Source directory
@@ -149,7 +149,7 @@ class PhotoOrganizer:
         self.message_panel.add_message(_('Collecting photo information...'))        # noqa F821
         logger.info('Collecting photo information...')
 
-        for file_infos in read_all_files(target_path, 1000):
+        for file_infos in read_all_files(target_path, self.batch_size):
             for file_info in file_infos:
                 save_to = file_info.get_relative_path(target_path)
                 # ファイルがすでに収集済みかをチェックする、収集済みの場合は特に処理なし
@@ -170,7 +170,7 @@ class PhotoOrganizer:
     def copy_photos(self, source_path: str, target_path: str) -> None:
         """指定フォルダー下にある写真ファイルを保存先にコピーし、ファイル情報をDBに収集する"""
         current_path = ''
-        for file_infos in read_all_files(source_path, 500):
+        for file_infos in read_all_files(source_path, self.batch_size):
             for file_info in file_infos:
                 # 現在処理中のフォルダー名を画面表示する
                 if current_path != file_info.path:

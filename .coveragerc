@@ -1,2 +1,2 @@
 [run]
-omit=busker/photo/sql.py, busker/photo/organizer.py
+omit=__init__.py, test_*.py, busker/photo/sql.py, busker/photo/organizer.py, busker/tkinter.py

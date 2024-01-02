@@ -3,10 +3,10 @@ import logging
 import locale
 
 
-def init_i18n(domain: str, localedir: str) -> None:     # pragma: no cover
+def init_i18n(domain: str, localedir: str) -> None:
     """多言語対応の初期化、localedirはlocaleフォルダーの絶対パス"""
-    lang, _ = locale.getdefaultlocale()
-    print(locale.getdefaultlocale())
+    lang, _ = locale.getlocale()
+    print(locale.getlocale())
 
     # Bind the text domain to the specified directory
     gettext.bindtextdomain(domain, localedir)
@@ -17,14 +17,9 @@ def init_i18n(domain: str, localedir: str) -> None:     # pragma: no cover
     # Create and install the translation
     _translation = gettext.translation(domain, localedir=localedir, languages=[lang], fallback=True)  # type: ignore
     _translation.install()
-    
-    print('Installed domain:', gettext._current_domain)     # type: ignore
-    print('Installed languages:', gettext.find(domain, localedir=localedir))
-    print('Installed languages:', gettext.find(domain, localedir=localedir, languages=[lang]))      # type: ignore
-    print('close', gettext.gettext('Close'))
 
 
-def init_logging(file_name: str, level, encoding: str) -> None:        # pragma: no cover
+def init_logging(file_name: str, level, encoding: str) -> None:
     """log出力の初期化"""
     logging.basicConfig(level=level)
     file_handler = logging.FileHandler(file_name, encoding=encoding)

@@ -1,7 +1,7 @@
 import pytest
 import os
 from datetime import datetime
-from busker.photo.file_info import FileType, FileInfo
+from busker.photo.file_info import FileType, FileInfo, read_all_files
 
 
 class TestFileType:
@@ -82,6 +82,17 @@ class TestFileInfo:
         assert file_info.captured_at is None
         assert file_info.save_to == '2023\\12'
 
+    def test_create_non_image(self):
+        name = 'test_photo.py'
+        path = os.path.dirname(os.path.abspath(__file__))
+
+        file_info = FileInfo.create(name, path)
+        assert file_info.id is None
+        assert file_info.name == name
+        assert file_info.path == path
+        assert file_info.file_type == FileType.UNKNOWN
+        assert file_info.captured_at is None
+
     def test_create_except(self):
         with pytest.raises(TypeError):
             FileInfo.create('screenshot20231009.png', None)
@@ -91,3 +102,32 @@ class TestFileInfo:
 
         with pytest.raises(FileNotFoundError):
             FileInfo.create('screenshot20231009.png', '.')
+
+    def test_full_name(self):
+        name = 'screenshot20231009.png'
+        path = os.path.dirname(__file__)
+        file_info = FileInfo.create(name, path)
+        assert file_info.full_name == os.path.join(os.path.dirname(path), 'photo', name)
+
+    def test_relative(self):
+        name = 'screenshot20231009.png'
+        path = os.path.dirname(__file__)
+        file_info = FileInfo.create(name, path)
+
+        assert file_info.get_relative_path(os.path.dirname(os.path.dirname(__file__))) == 'photo'
+
+
+def test_read_all_files():
+    source_path = os.path.dirname(__file__)
+    file_count = 4
+
+    batch_size = 5
+    for file_infos in read_all_files(source_path, batch_size=batch_size):
+        assert len(file_infos) == file_count
+
+    batch_size = 3
+    for file_infos in read_all_files(source_path, batch_size=batch_size):
+        if len(file_infos) >= batch_size:
+            assert len(file_infos) == batch_size
+        else:
+            assert len(file_infos) == file_count % batch_size

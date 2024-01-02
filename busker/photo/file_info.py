@@ -92,7 +92,7 @@ class FileInfo:
                     if exif:
                         datetime_str = exif.get(0x9003)
                         captured_at = datetime.strptime(datetime_str, "%Y:%m:%d %H:%M:%S")    # type: ignore
-            except Exception:
+            except Exception:               # pragma: no cover
                 pass
         
         save_to = datetime.strftime(captured_at if captured_at is not None else modified_at, "%Y" + os.path.sep + "%m")
