@@ -4,7 +4,6 @@ import os
 import shutil
 import logging
 import traceback
-from gettext import gettext as _
 from tkinter import filedialog, messagebox
 from busker.tkinter import center_window, MessagePanel
 from busker.utils import init_i18n, init_logging
@@ -146,7 +145,7 @@ class PhotoOrganizer:
     def inspect_collected_files(self, target_path: str) -> None:
         """保存先フォルダーにあるファイル情報が未収集の場合、DBに追加収集する"""
 
-        self.message_panel.add_message(_('Collecting photo information...'))        # noqa F821
+        self.message_panel.add_message(_('Collecting photo information...'))        # type: ignore # noqa F821
         logger.info('Collecting photo information...')
 
         for file_infos in read_all_files(target_path, self.batch_size):
@@ -164,7 +163,7 @@ class PhotoOrganizer:
                         sql.register_file_info(self.conn, file_info)
                         logger.debug(f'File {file_info.full_name} has been added to the database.')     # noqa
 
-        self.message_panel.add_message(_('Collecting photo information has finished.'))        # noqa F821
+        self.message_panel.add_message(_('Collecting photo information has finished.'))        # type: ignore # noqa F821
         logger.info('Collecting photo information has finished.')
 
     def copy_photos(self, source_path: str, target_path: str) -> None:
@@ -210,9 +209,10 @@ class PhotoOrganizer:
         self.window.mainloop()
 
 
-with sqlite3.connect('photo_organizer.db') as connection:
-    init_logging('photo_organizer.log', logging.INFO, 'utf-8')
-    localedir = os.path.join(os.path.dirname(__file__), 'locales')
-    init_i18n('messages', localedir)
-    app = PhotoOrganizer(connection)
-    app.run()
+if __name__ == "__main__":
+    with sqlite3.connect('photo_organizer.db') as connection:
+        init_logging('photo_organizer.log', logging.INFO, 'utf-8')
+        localedir = os.path.join(os.path.dirname(__file__), 'locales')
+        init_i18n('messages', localedir)
+        app = PhotoOrganizer(connection)
+        app.run()

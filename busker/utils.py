@@ -2,11 +2,13 @@ import gettext
 import logging
 import locale
 
+global _translation
+
 
 def init_i18n(domain: str, localedir: str) -> None:
     """多言語対応の初期化、localedirはlocaleフォルダーの絶対パス"""
-    lang, _ = locale.getlocale()
-    print(locale.getlocale())
+    lang, _ = locale.getlocale(locale.LC_CTYPE)
+    print(locale.getlocale(locale.LC_CTYPE))
 
     # Bind the text domain to the specified directory
     gettext.bindtextdomain(domain, localedir)
@@ -15,7 +17,7 @@ def init_i18n(domain: str, localedir: str) -> None:
     gettext.textdomain(domain)
     
     # Create and install the translation
-    _translation = gettext.translation(domain, localedir=localedir, languages=[lang], fallback=True)  # type: ignore
+    _translation = gettext.translation(domain, localedir=localedir, languages=[lang], fallback=False)  # type: ignore
     _translation.install()
 
 

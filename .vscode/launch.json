@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Python: Run Photo Organizer",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "busker.photo.organizer",
             "args": [],
@@ -14,7 +14,7 @@
         },
         {
             "name": "Python: Run Backup Files",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             // "program": "${workspaceFolder}/busker/file/backup/backupper.py",
             "module": "busker.file.backup.backupper",
@@ -25,7 +25,7 @@
         },
         {
             "name": "pytest busker", 
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "pytest",
             "args": [

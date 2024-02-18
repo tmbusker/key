@@ -4,13 +4,13 @@ REM Check for command-line arguments
 if "%1"=="" (
     echo Usage : %~0 app_path [locale]
     echo         app_path relative to project base directory
-    echo Usage Sample1 : %~0 busker\photo ja_JP
+    echo Usage Sample1 : %~0 busker\photo Japanese_Japan
     echo Usage Sample2 : %~0 busker\photo
     exit /b 1
 )
 
 if "%2"=="" (
-    set locale=ja_JP
+    set locale=Japanese_Japan
 ) else (
     set locale=%2
 )
